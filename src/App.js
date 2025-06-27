@@ -1,33 +1,44 @@
 import "./App.css";
-import Context from "./Context";
 import { useState } from "react";
-import { useReducer } from "react";
-import Form, { reducer } from "./Form";
-
+import Form from "./Form";
+import SkillForm from "./SkillForm";
+import ExperienceForm from "./ExperienceForm";
 
 function App() {
-  const [inputValue, setInputValue] = useState("");
-  // const [lists, setLists] = useState([]);
-  // const [lists, dispatch] = useReducer(reducer, []);
   const [editMode, setEditMode] = useState(false);
-  const [editList, setEditList] = useState("");
+  const [skillEditMode, setSkillEditMode] = useState(false);
+  const [experienceEditMode, setExperienceEditMode] = useState(false);
 
   function addEduHandler(e) {
     e.preventDefault();
     setEditMode(true);
   }
 
+  function addSkillHandler(e) {
+    e.preventDefault();
+    setSkillEditMode(true);
+  }
+
+   function addExpHandler(e) {
+    e.preventDefault();
+    setExperienceEditMode(true);
+  }
+
 
   return (
-
-    <Context.Provider
-    value={{}}  >
       <div className="App">
         <h1>Resume Builder</h1>
+
         <div className="resumeSection">
           <h2>Experience</h2>
-          <p>Experience Placeholder</p>
-          <button>Add Experience</button>
+          {experienceEditMode ? (
+              <ExperienceForm />            
+          ) : (
+            <div>
+              <p>Experience Placeholder</p>
+              <button onClick={addExpHandler}>Add Experience</button>
+            </div>
+          )}
           <br></br>
         </div>
 
@@ -47,16 +58,18 @@ function App() {
 
         <div className="resumeSection">         
           <h2>Skills</h2>
-          <p>Skill Placeholder</p>
-          <button>Add Skill</button>
-          <br></br>
+          {skillEditMode ? (
+              <SkillForm />            
+          ) : (
+            <div>
+              <p>Skill Placeholder</p>
+              <button onClick={addSkillHandler}>Add Skill</button>
+            </div>
+          )}
         </div>
-        <br></br>
+        
         <button>Export</button>
       </div>
-    </Context.Provider>
-
-
   );
 }
 

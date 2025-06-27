@@ -1,13 +1,13 @@
 import { useState, useEffect } from "react";
 
-const url = "http://127.0.0.1:5000/resume/education";
+const url = "http://127.0.0.1:5000/resume/skill";
 
-function Form() {
+function SkillForm() {
   const [inputValue, setInputValue] = useState("");
-  const [education, setEduation] = useState([]);
+  const [skill, setSkill] = useState([]);
   const [buttonText, setButtonText] = useState("Save");
 
-  async function getEdu() {
+  async function getSkill() {
     const response = await fetch(url);
     const data = await response.json();
 
@@ -16,8 +16,8 @@ function Form() {
       return;
     }
 
-    setEduation(data);
-    console.log(education);
+    setSkill(data);
+    console.log(skill);
 
     setInputValue(
       data.length > 0
@@ -28,7 +28,7 @@ function Form() {
 
 
   useEffect(() => {
-    getEdu();
+    getSkill();
   }, []);
 
 
@@ -55,7 +55,7 @@ async function submitHandler(e) {
     console.log("Submitted successfully");
     setInputValue("");     
     setButtonText("Saved successfully"); 
-    getEdu();                 
+    getSkill();                 
   } else {
     console.error("Failed to submit");
   }
@@ -82,4 +82,4 @@ async function submitHandler(e) {
   );
 }
 
-export default Form;
+export default SkillForm;
